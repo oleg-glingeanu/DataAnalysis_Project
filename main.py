@@ -2,17 +2,21 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-data = pd.read_csv('PS4_GamesSales')
+data = pd.read_csv('XboxOne_GameSales.csv',encoding='latin1')
 
-platform_index_list = data['North America'].tolist()
-platforms = list(dict.fromkeys(platform_index_list))
-sales_index_list = data['Global_Sales'].tolist()
-print(platforms)
+print(data.head())
 
 
-cut = [Europe, NorthAmerica, Japan]
-myLabels = ["Wii", 'Pc', 'Ps2']
-my_explode = [0.3, 0, 0]
+platform_index_list = data[data["Game"] == "Grand Theft Auto V"]
+europe = platform_index_list['Europe'].tolist()
+america = platform_index_list['North America'].tolist()
+rest_of_world = platform_index_list['Rest of World'].tolist()
 
+cut = [europe[0],america[0],rest_of_world[0]]
+
+print(cut)
+myLabels = ["Europe", 'North America', 'Rest of World']
+my_explode = [0, 0.1, 0.1]
 plt.pie(cut, labels=myLabels, explode=my_explode, shadow=True)
+plt.title("Grand Theft auto V sales")
 plt.show()
